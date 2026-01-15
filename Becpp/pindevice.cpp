@@ -1,5 +1,6 @@
-#include"pindevice.hpp"
+#include "pindevice.hpp"
 
-pindevice::pindevice(int pin) : pin_(pin){}
+PinDevice::PinDevice(int pin) : pin_(pin){}
 
-pindevice ::~pindevice()= default;
+PinDevice ::~PinDevice()= default;
+

@@ -1,16 +1,14 @@
 #include <Ultrasonic.h>
 #include "ultrasonicsensor.hpp"
 
-
-
-void ultrasonicsensor::begin(){
-  _ultrasonic=  new Ultrasonic(pin_);
+void UltrasonicSensor::begin(){
+  _ultrasonic= new Ultrasonic(pin_);
 }
 
-float ultrasonicsensor::MeasureInCentimeters() {
+float UltrasonicSensor::MeasureInCentimeters() {
   return _ultrasonic->MeasureInCentimeters();
 }
-ultrasonicsensor::~ultrasonicsensor() {
+UltrasonicSensor::~UltrasonicSensor() {
   delete _ultrasonic;
   _ultrasonic = nullptr;
 }

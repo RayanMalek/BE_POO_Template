@@ -1,20 +1,19 @@
 #ifndef ULTRASONICSENSOR_HPP
 #define ULTRASONICSENSOR_HPP
-#include"distancesensor.hpp"
+#include "distancesensor.hpp"
 
 #include <Arduino.h>
 class Ultrasonic;
-class ultrasonicsensor: public distancesensor{
-private :
-    
-    Ultrasonic* _ultrasonic;   // the Arduino ultrasonic object is owned by this class
 
-
-public :
-    using distancesensor :: distancesensor;
-    void begin() override;
+class UltrasonicSensor : public DistanceSensor{
+    private :
+        Ultrasonic* _ultrasonic;   // the Arduino ultrasonic object is owned by this class
+    public :
+        using DistanceSensor::DistanceSensor;
+        void begin() override;
     float MeasureInCentimeters() override;
-    ~ultrasonicsensor() override;
+    ~UltrasonicSensor() override;
 };
 #endif // UltraSonicSensor
 
+ 

@@ -1,23 +1,21 @@
 
 #include "pushbutton.hpp"
 
-
-
-void pushbutton::begin(){
+void PushButton::begin(){
     pinMode(pin_, INPUT_PULLUP);
 
 }
 
-pushbutton :: operator bool() const{
+PushButton :: operator bool() const{
     return digitalRead(pin_)==LOW;
 
   }
-bool pushbutton ::ispressed(){
+bool PushButton::isPressed(){
   return digitalRead(pin_)==LOW;
 } 
 
-pushbutton::Event pushbutton::poll(unsigned long nowMs) {
-  bool raw = ispressed(); // raw pressed?
+PushButton::Event PushButton::poll(unsigned long nowMs) {
+  bool raw = isPressed(); // raw pressed?
 
   // debounce: if raw changes, reset timer
   if (raw != lastRaw_) {
@@ -52,3 +50,4 @@ pushbutton::Event pushbutton::poll(unsigned long nowMs) {
 
   return Event::None;
 }
+

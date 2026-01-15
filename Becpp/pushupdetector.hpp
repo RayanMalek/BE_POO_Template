@@ -3,17 +3,17 @@
 
 #include <Arduino.h>
 
-class pushupdetector{
+class PushUpDetector{
  private :
     int th;
     bool armed;
     unsigned long lastCountMs;
-    unsigned long cooldownMs;
+    unsigned long coolDownMs;
     unsigned long lastReadMs;
     unsigned long readPeriodMs;
 
   public :
-  pushupdetector(int th,unsigned long cooldownMs,unsigned long readPeriodMs);
+  PushUpDetector(int th,unsigned long cooldownMs,unsigned long readPeriodMs);
   
   bool update(long d,unsigned long nowMs);
 };

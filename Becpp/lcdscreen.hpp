@@ -4,14 +4,14 @@
 #include <Arduino.h>
 #include "device.hpp"
 
-class lcdscreen : public device {
+
+class LcdScreen : public Device {
 private:
   int cols;
   int rows;
 
 public:
-  lcdscreen(int cols, int rows);
-
+  LcdScreen(int cols, int rows);
   void begin() override;
 
   // low-level

@@ -1,16 +1,13 @@
 #ifndef DISTANCESENSOR_HPP
 #define DISTANCESENSOR_HPP
 
-#include"pindevice.hpp"
+#include "pindevice.hpp"
 
-class distancesensor: public pindevice{
+class DistanceSensor: public PinDevice{
   public :
-  using pindevice::pindevice;//so the child of distancesensor can use pindevice(int pin ) without rewriting the ocnstructor
+  using PinDevice::PinDevice;//so the child of distancesensor can use pindevice(int pin ) without rewriting the ocnstructor
   virtual float MeasureInCentimeters()=0; // child implements the method 
-  ~distancesensor() override = default;
-
-
-
+  ~DistanceSensor() override = default;
 
 };
 

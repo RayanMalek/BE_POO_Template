@@ -4,38 +4,41 @@
 
 static rgb_lcd lcd;
 
-lcdscreen::lcdscreen(int col, int row) : cols(col), rows(row) {}
+LcdScreen::LcdScreen(int col, int row) : cols(col), rows(row) {}
 
-void lcdscreen::begin() {
+void LcdScreen::begin() {
+
   Wire.begin();
   lcd.begin(cols, rows);
   lcd.setRGB(255, 255, 255);
   lcd.clear();
 }
 
-void lcdscreen::clear() {
+void LcdScreen::clear() {
   lcd.clear();
 }
 
-void lcdscreen::printtext(int row, int col, const char *text) {
+void LcdScreen::printtext(int row, int col, const char *text) {
   lcd.setCursor(col, row);
   lcd.print(text);
 }
 
-void lcdscreen::printnumber(int row, int col, int value) {
+void LcdScreen::printnumber(int row, int col, int value) {
   lcd.setCursor(col, row);
+
+
   lcd.print(value);
 }
 
 // -------------------- High-level UI screens --------------------
 
-void lcdscreen::showIdle() {
+void LcdScreen::showIdle() {
   clear();
   printtext(0, 0, "Push-up counter");
   printtext(1, 0, "Press button");
 }
 
-void lcdscreen::showCounting(int reps) {
+void LcdScreen::showCounting(int reps) {
   // If you want a full refresh:
   // clear();
   // printtext(0, 0, "Counting...");
@@ -49,7 +52,7 @@ void lcdscreen::showCounting(int reps) {
   printnumber(1, 6, reps);
 }
 
-void lcdscreen::showSummary(int reps, int rank) {
+void LcdScreen::showSummary(int reps, int rank) {
   clear();
 
   printtext(0, 0, "Session:");
@@ -66,7 +69,7 @@ void lcdscreen::showSummary(int reps, int rank) {
   }
 }
 
-void lcdscreen::showLeaderboardEntry(int index1based, int reps) {
+void LcdScreen::showLeaderboardEntry(int index1based, int reps) {
   clear();
   printtext(0, 0, "Top5 #");
   printnumber(0, 6, index1based);
@@ -75,7 +78,7 @@ void lcdscreen::showLeaderboardEntry(int index1based, int reps) {
   printnumber(1, 6, reps);
 }
 
-void lcdscreen::showLeaderboardEmpty() {
+void LcdScreen::showLeaderboardEmpty() {
   clear();
   printtext(0, 0, "Top 5 empty");
   printtext(1, 0, "Press to exit");

@@ -1,3 +1,9 @@
+//include libraries:
+//grove_lcd_rgb_backlight
+//Grove ultrasonic ranger
+//include board:
+//Node MCU 1.0 ESP-12E
+
 #include "ultrasonicsensor.hpp"
 #include "pushupdetector.hpp"
 #include "pushbutton.hpp"
@@ -7,15 +13,15 @@
 #define PushButtonPin  D5
 
 const int th = 10;
-const unsigned long cooldownMs   = 400; // ignore repeats for 0.4s after a rep
+const unsigned long coolDownMs   = 400; // ignore repeats for 0.4s after a rep
 const unsigned long readPeriodMs = 50;  // sensor read rate
 
 static unsigned long lastSampleMs = 0;
 
-ultrasonicsensor sensor(UltrasonicPin);
-pushbutton       activate(PushButtonPin);
-pushupdetector   detector(th, cooldownMs, readPeriodMs);
-lcdscreen        screen(20, 2);
+UltrasonicSensor sensor(UltrasonicPin);
+PushButton       activate(PushButtonPin);
+PushUpDetector   detector(th, coolDownMs, readPeriodMs);
+LcdScreen        screen(20, 2);
 
 enum class AppState { Idle, Counting, Summary, Leaderboard };
 AppState state = AppState::Idle;
@@ -135,7 +141,7 @@ void loop() {
 
       if (detector.update(d, now)) {
         counter++;
-        // simple (may clear screen each rep depending on your lcdscreen::showCounting)
+        
         screen.showCounting(counter);
 
         Serial.print("push up : ");

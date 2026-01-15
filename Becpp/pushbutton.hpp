@@ -1,20 +1,20 @@
 #ifndef PUSHBUTTON_HPP
 #define PUSHBUTTON_HPP
 
-
 #include <Arduino.h>
 #include "digitalinput.hpp"
 
-class pushbutton:public digitalinput{
+
+class PushButton : public DigitalInput{
   public :
-  using digitalinput ::digitalinput;
+  using DigitalInput::DigitalInput;
 
   enum class Event {None, ShortPress,LongPress};
 
   Event poll(unsigned long nowMs);
   void begin() override;
-  bool ispressed() override;
-  ~pushbutton() override = default;
+  bool isPressed() override;
+  ~PushButton() override = default;
 
   operator bool() const;
 
