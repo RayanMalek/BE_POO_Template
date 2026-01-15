@@ -4,10 +4,51 @@
 
 
 void pushbutton::begin(){
-    pinMode(pin_, INPUT);
+    pinMode(pin_, INPUT_PULLUP);
 
 }
 
-bool pushbutton ::ishigh(){
-  return digitalRead(pin_)==HIGH;
+pushbutton :: operator bool() const{
+    return digitalRead(pin_)==LOW;
+
+  }
+bool pushbutton ::ispressed(){
+  return digitalRead(pin_)==LOW;
 } 
+
+pushbutton::Event pushbutton::poll(unsigned long nowMs) {
+  bool raw = ispressed(); // raw pressed?
+
+  // debounce: if raw changes, reset timer
+  if (raw != lastRaw_) {
+    lastRaw_ = raw;
+    lastChangeMs_ = nowMs;
+  }
+
+  // wait until stable long enough
+  if (nowMs - lastChangeMs_ < DebounceMs) {
+    return Event::None;
+  }
+
+  // update stable state
+  if (raw != stable_) {
+    stable_ = raw;
+
+    if (stable_) {
+      // became pressed
+      pressed_ = true;
+      pressStartMs_ = nowMs;
+      return Event::None;
+    } else {
+      // became released -> generate event
+      if (pressed_) {
+        pressed_ = false;
+        unsigned long held = nowMs - pressStartMs_;
+        if (held >= LongPressMs) return Event::LongPress;
+        return Event::ShortPress;
+      }
+    }
+  }
+
+  return Event::None;
+}

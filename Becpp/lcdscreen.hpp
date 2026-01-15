@@ -1,23 +1,30 @@
 #ifndef LCDSCREEN_HPP
 #define LCDSCREEN_HPP
 
-#include<Arduino.h>
-#include"device.hpp"
+#include <Arduino.h>
+#include "device.hpp"
 
 class lcdscreen : public device {
-private :
+private:
   int cols;
   int rows;
-  
 
-public :
-    lcdscreen(int cols,int rows);// Constructor: define geometry (not hardware yet)
+public:
+  lcdscreen(int cols, int rows);
 
-    void begin() override;// mandatory for each device
+  void begin() override;
 
-    void clear();// clears the screen
-    void printtext(int row,int col,const char* text);
-    void printnumber(int row,int col,int value);
+  // low-level
+  void clear();
+  void printtext(int row, int col, const char* text);
+  void printnumber(int row, int col, int value);
 
+  // high-level screens (NEW)
+  void showIdle();
+  void showCounting(int reps);
+  void showSummary(int reps, int rank);
+  void showLeaderboardEntry(int index1based, int reps); // e.g. #1 with 42 reps
+  void showLeaderboardEmpty();                          // when no scores yet
 };
+
 #endif
