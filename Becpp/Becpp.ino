@@ -37,7 +37,6 @@ int topCount = 0;
 // edge detect for button press
 bool lastBtn = false;
 
-// ---------- Leaderboard insert (Top 5, descending) ----------
 int leaderboardInsert(int reps) {
   if (reps <= 0) return 0;
 
@@ -58,7 +57,6 @@ int leaderboardInsert(int reps) {
   return pos + 1;
 }
 
-// ---------- Show one leaderboard page ----------
 void showLeaderboard(int idx) {
   if (topCount == 0) {
     screen.showLeaderboardEmpty();
@@ -68,7 +66,6 @@ void showLeaderboard(int idx) {
   }
 }
 
-// ---------- Arduino setup ----------
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
@@ -81,7 +78,6 @@ void setup() {
   screen.begin();
   screen.showIdle();
 
-  // If your ultrasonicsensor class doesn't have begin(), comment this out.
   sensor.begin();
 
   activate.begin();
@@ -92,11 +88,9 @@ void setup() {
   Serial.println("Press the button to get started");
 }
 
-// ---------- Arduino loop ----------
 void loop() {
   unsigned long now = millis();
 
-  // Create a single "press event" from ispressed()
   bool pressed = activate ;      // true while held
   bool pressEvent = (pressed && !lastBtn);     // rising edge
   lastBtn = pressed;

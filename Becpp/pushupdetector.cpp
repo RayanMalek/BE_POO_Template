@@ -14,11 +14,10 @@ lastCountMs(0)
 }
 
 bool PushUpDetector::update(long d,unsigned long nowMs){
-    // same as: if (millis() - lastReadMs < readPeriodMs) return;
     if (nowMs - lastReadMs < readPeriodMs) return false;//Ignore sensor values if I checked too recently    
     lastReadMs = nowMs;
 
-    // same as: if (d >= th) armed = true;
+    
     if (d >= th) { // if user back up (d is big again ) rearm 
         armed = true;
     }
@@ -31,6 +30,5 @@ bool PushUpDetector::update(long d,unsigned long nowMs){
             return true; // rep detected
         }
     }
-
     return false;
 }

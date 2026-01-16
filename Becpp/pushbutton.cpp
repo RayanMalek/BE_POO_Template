@@ -8,7 +8,6 @@ void PushButton::begin(){
 
 PushButton :: operator bool() const{
     return digitalRead(pin_)==LOW;
-
   }
 bool PushButton::isPressed(){
   return digitalRead(pin_)==LOW;

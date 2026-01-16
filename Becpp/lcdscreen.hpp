@@ -19,11 +19,11 @@ public:
   void printtext(int row, int col, const char* text);
   void printnumber(int row, int col, int value);
 
-  // high-level screens (NEW)
+  // high-level screens 
   void showIdle();
   void showCounting(int reps);
   void showSummary(int reps, int rank);
-  void showLeaderboardEntry(int index1based, int reps); // e.g. #1 with 42 reps
+  void showLeaderboardEntry(int index1based, int reps); 
   void showLeaderboardEmpty();                          // when no scores yet
 };
 

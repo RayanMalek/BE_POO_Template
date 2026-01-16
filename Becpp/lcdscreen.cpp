@@ -7,7 +7,6 @@ static rgb_lcd lcd;
 LcdScreen::LcdScreen(int col, int row) : cols(col), rows(row) {}
 
 void LcdScreen::begin() {
-
   Wire.begin();
   lcd.begin(cols, rows);
   lcd.setRGB(255, 255, 255);
@@ -39,13 +38,6 @@ void LcdScreen::showIdle() {
 }
 
 void LcdScreen::showCounting(int reps) {
-  // If you want a full refresh:
-  // clear();
-  // printtext(0, 0, "Counting...");
-  // printtext(1, 0, "Reps: 0");
-
-  // Better: draw the static once and update reps separately in main,
-  // but simplest is this:
   clear();
   printtext(0, 0, "Counting...");
   printtext(1, 0, "Reps: ");
@@ -54,7 +46,6 @@ void LcdScreen::showCounting(int reps) {
 
 void LcdScreen::showSummary(int reps, int rank) {
   clear();
-
   printtext(0, 0, "Session:");
   printnumber(0, 9, reps);
   printtext(0, 13, "reps");
@@ -73,7 +64,6 @@ void LcdScreen::showLeaderboardEntry(int index1based, int reps) {
   clear();
   printtext(0, 0, "Top5 #");
   printnumber(0, 6, index1based);
-
   printtext(1, 0, "Reps:");
   printnumber(1, 6, reps);
 }
